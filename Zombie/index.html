@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Zombie Hunting Game</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+
+<h3 id='scorebar'> Score </h3>
+
+<h1 id='title'> Zombie Hunting Game </h1>
+
+<button id='start'> Start </button>
+
+<h1 id='endscreen'> Game Over </h1>
+
+<br>
+
+<h2 id='result'> Final Score </h2>
+
+<br><br>
+
+<button id='restart'> Restart </button>
+
+<img id='zombie' src="images/zombie.png" alt="Zombie">
+
+<img id='zombie2' src="images/zombie2.png" alt="secondZombie">
+
+<button id='end'> End Game </button>
+
+
+<script>
+
+let maxheight = 0;
+let maxwidth = 0;
+let topL = 200;
+let leftL = 500;
+let score = 0;
+let timer;
+let interval = 2000;
+let audio = new Audio('src/gunshot.wav')
+
+function screenSize() {
+	maxwidth = window.innerWidth;
+	maxheight = window.innerHeight;
+}
+screenSize();
+
+function rand(a, b) {
+	return Math.random() * (b - a) + a;
+}
+
+
+function randomLocation() {
+	if (leftL < 0) {
+		leftL = 0;
+	}
+	if (topL < 0) {
+		topL = 0;
+	}
+	document.getElementById('zombie').style.animation = "idle 2000ms infinite";
+	document.getElementById('zombie').style.left = leftL + "px";
+	document.getElementById('zombie').style.top = topL + "px";
+	if (score >= 10) {
+		topL = Math.floor(rand(0, maxheight)) - 100;
+		leftL = Math.floor(rand(0, maxwidth)) - 100;
+		document.getElementById('zombie2').style.animation = "idle 2000ms infinite";
+		document.getElementById('zombie2').style.left = leftL + "px";
+		document.getElementById('zombie2').style.top = topL + "px";
+	}
+	topL = Math.floor(rand(0, maxheight)) - 100;
+	leftL = Math.floor(rand(0, maxwidth)) - 100;
+
+}
+
+function startCycle() {
+	if (score == 10) {
+		document.getElementById('zombie2').style.display = "inline";
+	}
+	timer = setInterval(randomLocation, 1000);
+}
+
+function endCycle() {
+	clearInterval(timer);
+}
+
+function die() {
+	audio.play();
+	document.getElementById('zombie').style.animation = "die 1s 1";
+	endCycle();
+	audio.currentTime = 0;
+	scoring();
+	setTimeout(startCycle);
+}
+
+function scoring() {
+	score += 1;
+	document.getElementById('scorebar').innerHTML = "Score: " + score;
+	// timer = setInterval(randomLocation, 2000)
+}
+
+// function difficulty() {
+// 	if (score % 5 == 0) {
+// 		interval -= 200;
+// 	}
+// }
+
+function startGame() {
+	document.getElementById('title').style.display = "none";
+	document.getElementById('start').style.display = "none";
+	document.getElementById('scorebar').style.display = "inline";
+	document.getElementById('zombie').style.display = "inline";
+	document.getElementById('end').style.display = "inline";
+	document.getElementById('scorebar').innerHTML = "Score: " + score;
+	startCycle();
+	// timer = setInterval(randomLocation, 1000);
+}
+
+function endGame() {
+	document.getElementById('zombie').style.display = "none";
+	document.getElementById('scorebar').style.display = "none";
+	document.getElementById('endscreen').style.display = "inline";
+	document.getElementById('result').style.display = "inline";
+	document.getElementById('end').style.display = "none";
+	document.getElementById('restart').style.display = "inline";
+	document.getElementById('result').innerHTML = "Final Score: " + score;
+}
+
+function restart() {
+	score = 0;
+	document.getElementById('endscreen').style.display = "none"
+	document.getElementById('end').style.display = "none";
+	document.getElementById('result').style.display = "none";
+	document.getElementById('restart').style.display = "none";
+	document.getElementById('zombie').style.display = "inline";
+	document.getElementById('scorebar').style.display = "inline";
+	document.getElementById('scorebar').innerHTML = "Score: " + score;
+	document.getElementById('end').style.display = "inline";
+}
+
+
+document.getElementById('start').onclick = startGame;
+document.getElementById('zombie').onclick = die;
+document.getElementById('zombie2').onclick = die;
+document.getElementById('end').onclick = endGame;
+document.getElementById('restart').onclick = restart;
+
+
+</script>
+
+</body>
+</html>

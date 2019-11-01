@@ -1,0 +1,75 @@
+body {
+	background-color: grey;
+}
+
+@keyframes idle {
+	0% {transform: rotate(-30deg);}
+	50% {transform: rotate(30deg)}
+	100% {transform: rotate(-30deg);}
+}
+
+@keyframes die {
+	from {transform: rotate(0deg); opacity: 1;}
+	to {transform: rotate(360deg); opacity: 0;}
+}
+
+#title {
+	text-align: center;
+	font-size: 100px
+}
+
+#start {
+	font-size: 80px;
+	position: absolute;
+	left: 40%;
+}
+
+#end {
+	display: none;
+	position: absolute;
+	left: 87%;
+	top: 95%;
+}
+
+#zombie {
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	left: 45%;
+	top: 60%;
+	display: none;
+	animation: idle 2000ms infinite;
+}
+
+#zombie2 {
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	left: 70%;
+	top: 20%;
+	display: none;
+	animation: idle 2000ms infinite;
+}
+
+#scorebar {
+	display: none;
+	color: pink;
+	position: absolute;
+	z-index: 1;
+	font-size: 59px;
+}
+
+#endscreen {
+	display: none;
+	font-size: 100px;
+	color: red;
+}
+
+#result {
+	display: none;
+	font-size: 50px;
+}
+
+#restart {
+	display: none;
+}
