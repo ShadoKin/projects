@@ -24,7 +24,7 @@
 
 <img id='zombie' src="images/zombie.png" alt="Zombie">
 
-<img id='zombie2' src="images/zombie2.png" alt="secondZombie">
+<!-- <img id='zombie2' src="images/zombie2.png" alt="secondZombie"> -->
 
 <button id='end'> End Game </button>
 
@@ -38,6 +38,8 @@ let leftL = 500;
 let score = 0;
 let timer;
 let interval = 2000;
+let click = document.getElementById('zombie')
+// let click2 = document.getElementById('zombie2')
 let audio = new Audio('src/gunshot.wav')
 
 function screenSize() {
@@ -61,23 +63,16 @@ function randomLocation() {
 	document.getElementById('zombie').style.animation = "idle 2000ms infinite";
 	document.getElementById('zombie').style.left = leftL + "px";
 	document.getElementById('zombie').style.top = topL + "px";
-	if (score >= 10) {
-		topL = Math.floor(rand(0, maxheight)) - 100;
-		leftL = Math.floor(rand(0, maxwidth)) - 100;
-		document.getElementById('zombie2').style.animation = "idle 2000ms infinite";
-		document.getElementById('zombie2').style.left = leftL + "px";
-		document.getElementById('zombie2').style.top = topL + "px";
-	}
 	topL = Math.floor(rand(0, maxheight)) - 100;
 	leftL = Math.floor(rand(0, maxwidth)) - 100;
-
+	click.addEventListener('click', die)
 }
 
 function startCycle() {
-	if (score == 10) {
-		document.getElementById('zombie2').style.display = "inline";
-	}
-	timer = setInterval(randomLocation, 1000);
+	// if (score == 10) {
+	// 	document.getElementById('zombie2').style.display = "inline";
+	// }
+	timer = setInterval(randomLocation, 700);
 }
 
 function endCycle() {
@@ -90,8 +85,18 @@ function die() {
 	endCycle();
 	audio.currentTime = 0;
 	scoring();
+	click.removeEventListener('click', die)
 	setTimeout(startCycle);
 }
+
+// function die2() {
+// 	audio.play();
+// 	document.getElementById('zombie2').style.animation = "die 1s 1";
+// 	audio.currentTime = 0;
+// 	scoring();
+// 	click.removeEventListener('click', die)
+// 	setTimeout(startCycle);
+// }
 
 function scoring() {
 	score += 1;
@@ -140,8 +145,11 @@ function restart() {
 
 
 document.getElementById('start').onclick = startGame;
-document.getElementById('zombie').onclick = die;
-document.getElementById('zombie2').onclick = die;
+
+click.addEventListener('click', die)
+// click2.addEventListener('click', die2)
+// document.getElementById('zombie').onclick = die;
+// document.getElementById('zombie2').onclick = die;
 document.getElementById('end').onclick = endGame;
 document.getElementById('restart').onclick = restart;
 
