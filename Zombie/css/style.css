@@ -15,7 +15,8 @@ body {
 
 #title {
 	text-align: center;
-	font-size: 100px
+	font-size: 100px;
+	color: blue;
 }
 
 #start {

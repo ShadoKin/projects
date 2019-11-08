@@ -37,7 +37,7 @@ let topL = 200;
 let leftL = 500;
 let score = 0;
 let timer;
-let interval = 2000;
+let interval = 1100;
 let click = document.getElementById('zombie')
 // let click2 = document.getElementById('zombie2')
 let audio = new Audio('src/gunshot.wav')
@@ -72,7 +72,7 @@ function startCycle() {
 	// if (score == 10) {
 	// 	document.getElementById('zombie2').style.display = "inline";
 	// }
-	timer = setInterval(randomLocation, 700);
+	timer = setInterval(randomLocation, interval);
 }
 
 function endCycle() {
@@ -80,8 +80,12 @@ function endCycle() {
 }
 
 function die() {
+	if (score % 5 == 0) {
+		interval -= 100
+	}
+	console.log(interval)
 	audio.play();
-	document.getElementById('zombie').style.animation = "die 1s 1";
+	document.getElementById('zombie').style.animation = "die " + interval + "ms 1";
 	endCycle();
 	audio.currentTime = 0;
 	scoring();
