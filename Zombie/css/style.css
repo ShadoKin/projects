@@ -1,5 +1,5 @@
 body {
-	background-color: grey;
+	background-image: url('../images/background.jpg')
 }
 
 @keyframes idle {
@@ -52,6 +52,7 @@ body {
 }
 
 #scorebar {
+	font-family: Comic Sans MS;
 	display: none;
 	color: pink;
 	position: absolute;
