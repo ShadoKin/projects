@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<button id='generate' style="font-size: 50px"> Select </button>
+<h1 id='name' style="font-size: 50px"> Name </h1>
+
+<script>
+let names = ["Cedrick", "Matthew", "Yazdon", "Jackson", "Paul",
+			"Andy Chow", "Jastej", "Bernard", "Jason Guan", "Joey",
+			"Bao", "Aiden", "Eric", "Taylor", "Navin", "Martin",
+			"Jason Quach", "John", "Andy Ta", "Mahsa", "Uy", 
+			"Daniella", "Felicia", "Amir"]
+
+function rand(a, b) {
+	return Math.random() * (b - a) + a;
+}
+
+function randomize() {
+	let random = Math.floor(rand(0, names.length))
+	console.log(random)
+	document.getElementById('name').innerHTML = names[random]
+}
+document.getElementById('generate').onclick = randomize
+
+
+</script>
+
+</body>
+</html>
