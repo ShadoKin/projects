@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<p id="question">How many buttons to create?</p>
+<input id="answer" type="text">
+<input id="go" type="button" value="Go">
+<p id="response">
+
+<script>
+
+function screenSize() {
+	let maxwidth = window.innerWidth;
+	let maxheight = window.innerHeight;
+	return [maxwidth, maxheight]
+}
+values = screenSize();
+maxwidth = values[0]
+maxheight = values[1]
+
+function rand(a, b) {
+	return Math.random() * (b - a) + a;
+}
+
+function Button(width, height, amount) {
+	this.width = width
+	this.height = height
+	this.amount = amount
+	this.create = function() {create(width, height, amount)}
+}
+
+function create(width, height, amt) {
+	for (i = 0; i < amt; i++) {
+		let element = document.createElement("BUTTON")
+		element.style.width = width + "em"
+		element.style.height = height + "em"
+		document.body.appendChild(element)
+		setInterval(function() {
+			let topL = Math.floor(rand(0, maxheight)) - 80;
+			let leftL = Math.floor(rand(0, maxwidth)) - 160;	
+			console.log(topL, leftL)
+			if (leftL < 0) {
+				leftL = 0;
+			}
+			if (topL < 0) {
+				topL = 0;
+			}
+			element.style.position = 'absolute'
+			element.style.top = topL + "px"
+			element.style.left = leftL + "px"
+				}, 2000)
+	}
+}
+
+function check(amt) {
+	if (amt >= 5 && amt <= 100) {
+		return true
+	} else {
+		return false
+	}
+}
+
+function make() {
+	let amt = document.getElementById('answer').value
+	if (check(amt)) {
+		document.getElementById('question').style.display = 'none'
+		document.getElementById('answer').style.display = 'none'
+		document.getElementById('go').style.display = 'none'
+		document.getElementById('response').style.display = 'none'
+		let btn = new Button(10, 5, amt)
+		btn.create(10, 5, amt)
+	} else {
+		document.getElementById('response').innerHTML = "Enter a value between 5 and 100"
+	}
+}
+
+
+document.getElementById("go").onclick = make
+
+</script>
+
+</body>
+</html>
