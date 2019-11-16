@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<script>
+
+let number = prompt("Enter a number between 0 and 26");
+
+function generateButtons(number) {
+	for (i = 0; i < number; i++) {
+		let element = document.createElement("BUTTON")
+		document.body.appendChild(element)
+		document.body.appendChild(document.createTextNode(" "))
+		let ascii = 65
+		let letter = String.fromCharCode(ascii + i)
+		element.innerHTML = letter
+		element.onclick = function() {
+			console.log("Button " + letter + " was clicked.")
+		}
+	}
+	let br = document.createElement("br")
+	document.body.appendChild(br)
+
+}
+
+function recipe(title, servings, ingredients) {
+	this.title = title
+	this.servings = servings
+	this.ingredients = ingredients
+	this.print = function() {print(servings)}
+}
+
+
+function print(nOfServings) {
+	document.write("Title: ", recipeA.title)
+	document.write("<br>")
+	document.write("Servings: ", nOfServings)
+	document.write("<br>")
+	document.write("Ingredients: ")
+	for (i = 0; i < recipeA.ingredients.length; i++) {
+		document.write("<br>" + recipeA.ingredients[i])
+	}
+}
+
+
+generateButtons(number);
+let recipeA = new recipe("GhirmehSabzi", 2, ["cinnamon", "lettuce", "onion"])
+recipeA.print(2)
+
+</script>
+
+</body>
+</html>
